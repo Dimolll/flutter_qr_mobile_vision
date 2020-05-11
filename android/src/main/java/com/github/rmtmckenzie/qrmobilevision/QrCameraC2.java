@@ -314,7 +314,9 @@ class QrCameraC2 implements QrCamera {
             cameraDevice.close();
         }
         if (reader != null) {
-            reader.close();
+            reader.acquireLatestImage().close();
+            Image nextImage = reader.acquireNextImage();
+            if (nextImage != null) nextImage.close();
         }
     }
 
